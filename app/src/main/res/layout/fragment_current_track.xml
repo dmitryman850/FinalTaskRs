@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/image_current_track"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_album_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageViewGradient"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/gradient_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/image_current_track"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <ImageView
+        android:id="@+id/btn_settings_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_settings_current"
+        app:layout_constraintBottom_toBottomOf="@+id/image_current_track"
+        app:layout_constraintEnd_toEndOf="@+id/image_current_track" />
+
+    <TextView
+        android:id="@+id/text_name_track_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_current_track"
+        tools:text="Название трека" />
+
+    <LinearLayout
+        android:id="@+id/linlayoutname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_name_track_current">
+
+        <TextView
+            android:id="@+id/text_name_group_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            app:layout_constrainedWidth="true"
+            tools:text="Название группы " />
+
+        <TextView
+            android:id="@+id/probel"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/tere"
+            android:textColor="@color/text_black"
+            android:textSize="14sp"
+            app:layout_constrainedWidth="true" />
+
+        <TextView
+            android:id="@+id/text_name_album_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            app:layout_constrainedWidth="true"
+            tools:text="название альбома" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/text_duration_start_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/seek_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="0:00" />
+
+    <TextView
+        android:id="@+id/text_duration_end_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/seek_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        tools:text="3:05" />
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_current"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back_current"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_previous_current"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_play_current"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_play_current"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next_current"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_current" />
+
+    <ImageView
+        android:id="@+id/btn_next_current"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_next_current"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

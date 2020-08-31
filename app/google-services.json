@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "246251159801",
+    "firebase_url": "https://finaltaskrs2020.firebaseio.com",
+    "project_id": "finaltaskrs2020",
+    "storage_bucket": "finaltaskrs2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246251159801:android:64165b0b918352a1016228",
+        "android_client_info": {
+          "package_name": "com.example.finaltask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246251159801-bu7q6o4eks46f0kq84sertl6riqjabe8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0yXxIf4D6Lz96zPW1KcxOJsU6hRfj5ak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246251159801-bu7q6o4eks46f0kq84sertl6riqjabe8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

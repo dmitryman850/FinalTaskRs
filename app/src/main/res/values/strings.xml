@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FinalTask</string>
+    <string name="hint_enter_email">Введите ваш email</string>
+    <string name="hint_enter_password">Введите ваш пароль</string>
+    <string name="btn_registration">Регистрация</string>
+    <string name="btn_login">Войти</string>
+    <string name="txt_btn_logout">Выйти из аккаунта</string>
+    <string name="txt_btn_to_settings">Настройки</string>
+    <string name="txt_settings">Настройки</string>
+    <string name="tere">-</string>
+</resources>
