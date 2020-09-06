@@ -20,29 +20,30 @@ class CurrentTrackFragment : Fragment() {
     private lateinit var albumNameView: TextView
     private lateinit var durationTrackView: TextView
     private lateinit var albumImageView: ImageView
-    var mediaPlayer: MediaPlayer? = null
+    private var mediaPlayer: MediaPlayer? = null
     private var pathTrack: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_current_track, null)
 
         var flag = true
         val btnPlayCurrent = view.findViewById<ImageView>(R.id.btn_play_current)
         btnPlayCurrent.setOnClickListener(View.OnClickListener {
-            if(flag) {
+            if (flag) {
                 btnPlayCurrent.setImageResource(R.drawable.ic_pause_current)
                 mediaPlayer = MediaPlayer()
                 mediaPlayer!!.setDataSource(pathTrack)
                 mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
                 mediaPlayer!!.prepare()
                 mediaPlayer!!.start()
-            }
-            else {
+            } else {
                 btnPlayCurrent.setImageResource(R.drawable.ic_play_current)
                 mediaPlayer!!.pause()
             }
-                flag = !flag
+            flag = !flag
         })
 
         nameTrackView = view.findViewById(R.id.text_name_track_current)
@@ -59,15 +60,14 @@ class CurrentTrackFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setFragmentResultListener("requestKey") {
-            key, bundle ->
+        setFragmentResultListener("requestKey") { key, bundle ->
             nameTrackView.text = bundle.getString("trackNameKey")
             groupNameView.text = bundle.getString("groupNameKey")
             durationTrackView.text = bundle.getString("durationTrackKey")
             albumNameView.text = bundle.getString("albumNameKey")
             pathTrack = bundle.getString("pathKey")
             val album = bundle.getByteArray("albumImageKey")
-            if(album != null) {
+            if (album != null) {
                 context?.let {
                     Glide.with(it).asBitmap()
                         .load(album)
@@ -83,4 +83,5 @@ class CurrentTrackFragment : Fragment() {
         }
     }
 }
+
 

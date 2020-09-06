@@ -12,10 +12,11 @@ import com.bumptech.glide.Glide
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class RecyclerMusicAdapter(private var mContext: Context?,
-                           private var mFiles: ArrayList<MusicFiles>,
-                           private val itemClickListener: OnItemClickListener)
-    : RecyclerView.Adapter<MyViewHolder>() {
+class RecyclerMusicAdapter(
+    private var mContext: Context?,
+    private var mFiles: ArrayList<MusicFiles>,
+    private val itemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -35,9 +36,12 @@ class RecyclerMusicAdapter(private var mContext: Context?,
         val milliseconds = mFiles[position].getDuration().toLong()
         val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) % 60
-        val minutesString = when{
-            minutes.toString().isEmpty() -> {"0"}
-        else -> minutes.toString()}
+        val minutesString = when {
+            minutes.toString().isEmpty() -> {
+                "0"
+            }
+            else -> minutes.toString()
+        }
         val secondsString = when {
             seconds.toString().length == 1 -> {
                 "0$seconds"
@@ -51,7 +55,16 @@ class RecyclerMusicAdapter(private var mContext: Context?,
         val durationTrackBind = "$minutesString:$secondsString"
         val imageAlbumBind: ByteArray? = getAlbumArt(mFiles[position].getPath())
 
-        myHolder.bind(trackNameBind, groupNameBind, albumNameBind, durationTrackBind, imageAlbumBind, mContext, itemClickListener, pathBind)
+        myHolder.bind(
+            trackNameBind,
+            groupNameBind,
+            albumNameBind,
+            durationTrackBind,
+            imageAlbumBind,
+            mContext,
+            itemClickListener,
+            pathBind
+        )
     }
 
     private fun getAlbumArt(uri: String): ByteArray? {
@@ -63,7 +76,7 @@ class RecyclerMusicAdapter(private var mContext: Context?,
     }
 }
 
-class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val trackName = itemView.findViewById<TextView>(R.id.text_name_track_random)
     private val groupName = itemView.findViewById<TextView>(R.id.text_name_group_random)
     private val durationTrack = itemView.findViewById<TextView>(R.id.text_duration_random)
@@ -71,13 +84,20 @@ class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val albumName = itemView.findViewById<TextView>(R.id.text_name_album_random)
 
     fun bind(
-        trackNameBind: String, groupNameBind: String, albumNameBind: String,
-        durationTrackBind: String, imageAlbumBind: ByteArray?, mContext: Context?, clickListener: OnItemClickListener, pathBind: String) {
+        trackNameBind: String,
+        groupNameBind: String,
+        albumNameBind: String,
+        durationTrackBind: String,
+        imageAlbumBind: ByteArray?,
+        mContext: Context?,
+        clickListener: OnItemClickListener,
+        pathBind: String
+    ) {
         trackName.text = trackNameBind
         groupName.text = groupNameBind
         albumName.text = albumNameBind
         durationTrack.text = durationTrackBind
-        if(imageAlbumBind != null) {
+        if (imageAlbumBind != null) {
             mContext?.let {
                 Glide.with(it).asBitmap()
                     .load(imageAlbumBind)
@@ -93,14 +113,18 @@ class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
 
         itemView.setOnClickListener {
-            clickListener.onItemClicked(trackNameBind, groupNameBind, albumNameBind,
-                durationTrackBind, imageAlbumBind, pathBind)
+            clickListener.onItemClicked(
+                trackNameBind, groupNameBind, albumNameBind,
+                durationTrackBind, imageAlbumBind, pathBind
+            )
         }
     }
 }
 
 
-    interface OnItemClickListener {
-        fun onItemClicked(trackNameBind: String, groupNameBind: String, albumNameBind: String,
-                          durationTrackBind: String, imageAlbumBind: ByteArray?, pathBind: String)
-    }
+interface OnItemClickListener {
+    fun onItemClicked(
+        trackNameBind: String, groupNameBind: String, albumNameBind: String,
+        durationTrackBind: String, imageAlbumBind: ByteArray?, pathBind: String
+    )
+}

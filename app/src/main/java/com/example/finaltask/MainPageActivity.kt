@@ -48,7 +48,7 @@ class MainPageActivity : AppCompatActivity() {
     }
 
     fun getViewPager(): ViewPager {
-        if(null == viewPager) {
+        if (null == viewPager) {
             viewPager = findViewById(R.id.view_pager)
         }
         return viewPager

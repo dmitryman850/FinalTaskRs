@@ -19,7 +19,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    val REQUEST_CODE = 1
+    private val REQUEST_CODE = 1
+
     companion object {
         lateinit var musicFiles: ArrayList<MusicFiles>
     }
@@ -52,12 +53,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnRegistration.setOnClickListener(this)
         btnLogin.setOnClickListener(this)
 
-        if(firebaseAut.currentUser != null) {
+        if (firebaseAut.currentUser != null) {
             startActivity(Intent(applicationContext, MainPageActivity::class.java))
         }
     }
 
-     fun registerUser(){
+    fun registerUser() {
         val email = editTxtEmail.text.toString().trim()
         val password = editTxtPassword.text.toString().trim()
         textProgress.text = "Выполняется регистрация"
@@ -72,8 +73,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 return
             }
             password.length < 5 -> {
-                Toast.makeText(this, "Пароль должен состоять минимум из 5 символов",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this, "Пароль должен состоять минимум из 5 символов",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             }
         }
@@ -87,8 +90,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     finish()
                     startActivity(Intent(applicationContext, MainPageActivity::class.java))
                 } else {
-                    Toast.makeText(this, "Регистрация провалена, повторите попытку",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Регистрация провалена, повторите попытку",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 backgroundProgressLine.visibility = LinearLayout.INVISIBLE
             }
@@ -116,8 +121,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     finish()
                     startActivity(Intent(applicationContext, MainPageActivity::class.java))
                 } else {
-                    Toast.makeText(this, "Неверный Email или пароль",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Неверный Email или пароль",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 backgroundProgressLine.visibility = LinearLayout.INVISIBLE
             }
@@ -134,10 +141,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun permission() {
-        if(ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                REQUEST_CODE)
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_CODE
+            )
         } else {
             musicFiles = getAllAudio(this)
         }
@@ -149,19 +162,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE)
-        {
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 musicFiles = getAllAudio(this)
-            }
-            else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_CODE)
+            } else {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQUEST_CODE
+                )
             }
         }
     }
+
     private fun getAllAudio(context: Context): ArrayList<MusicFiles> {
-        val tempAudioList : ArrayList<MusicFiles> = ArrayList()
+        val tempAudioList: ArrayList<MusicFiles> = ArrayList()
         val uri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(
             MediaStore.Audio.Media.ALBUM,
@@ -169,13 +183,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             MediaStore.Audio.Media.DURATION,
             MediaStore.Audio.Media.DATA, //For Path
             MediaStore.Audio.Media.ARTIST,
-        MediaStore.Audio.AlbumColumns.ALBUM)
-        val cursor: Cursor? = context.contentResolver.query(uri, projection, null,
-            null, null)
+            MediaStore.Audio.AlbumColumns.ALBUM
+        )
+        val cursor: Cursor? = context.contentResolver.query(
+            uri, projection, null,
+            null, null
+        )
         if (cursor != null) {
             cursor.moveToFirst()
             while (cursor.moveToNext()) {
-                val albumArt:String = if (cursor.getString(0) == null) {
+                val albumArt: String = if (cursor.getString(0) == null) {
                     "unknown album art"
                 } else {
                     cursor.getString(0)
@@ -200,13 +217,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     cursor.getString(4)
                 }
-                val albumName: String = if(cursor.getString(5) == null) {
+                val albumName: String = if (cursor.getString(5) == null) {
                     "unknown album"
                 } else {
                     cursor.getString(5)
                 }
 
-                val musicFiles: MusicFiles = MusicFiles(path, title, artist, albumArt, duration, albumName)
+                val musicFiles: MusicFiles =
+                    MusicFiles(path, title, artist, albumArt, duration, albumName)
                 Log.e("Path : $path", "Album : $albumArt")
                 tempAudioList.add(musicFiles)
             }

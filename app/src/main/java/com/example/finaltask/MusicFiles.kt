@@ -9,39 +9,50 @@ class MusicFiles(
     private var albumName: String
 ) {
     fun getPath(): String {
-            return path
-        }
-    fun  setPath(path: String) {
-            this.path = path
-        }
-    fun getTitle():String {
-            return title
-        }
+        return path
+    }
+
+    fun setPath(path: String) {
+        this.path = path
+    }
+
+    fun getTitle(): String {
+        return title
+    }
+
     fun setTitle(title: String) {
-            this.title = title
-        }
-    fun getArtist():String {
-            return artist
-        }
+        this.title = title
+    }
+
+    fun getArtist(): String {
+        return artist
+    }
+
     fun setArtist(artist: String) {
-            this.artist = artist
-        }
-    fun getAlbumArt() :String {
-            return  albumArt
-        }
+        this.artist = artist
+    }
+
+    fun getAlbumArt(): String {
+        return albumArt
+    }
+
     fun setAlbumArt(albumArt: String) {
-            this.albumArt
-        }
-    fun getDuration():String {
-            return duration
-        }
+        this.albumArt
+    }
+
+    fun getDuration(): String {
+        return duration
+    }
+
     fun setDuration(duration: String) {
-            this.duration = duration
-        }
+        this.duration = duration
+    }
+
     fun getAlbumName(): String {
         return albumName
     }
-    fun setAlbumName(albumName: String){
+
+    fun setAlbumName(albumName: String) {
         this.albumName
     }
 }
