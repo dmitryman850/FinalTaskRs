@@ -32,6 +32,9 @@ class CurrentTrackFragment : Fragment() {
         var flag = true
         val btnPlayCurrent = view.findViewById<ImageView>(R.id.btn_play_current)
         btnPlayCurrent.setOnClickListener(View.OnClickListener {
+            if (pathTrack == null) {
+                return@OnClickListener
+            }
             if (flag) {
                 btnPlayCurrent.setImageResource(R.drawable.ic_pause_current)
                 mediaPlayer = MediaPlayer()

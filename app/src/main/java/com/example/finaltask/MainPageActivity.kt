@@ -16,21 +16,20 @@ import com.example.finaltask.fragments.RandomFragment
 import com.google.android.material.tabs.TabLayout
 
 
-class MainPageActivity : AppCompatActivity() {
-    private lateinit var viewPager: ViewPager
+class MainPageActivity : AppCompatActivity(), RandomFragment.OnCurrentFragmentClickListener {
+    private lateinit var mViewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page)
 
-
-        val viewPager = findViewById<ViewPager>(R.id.view_pager)
+        mViewPager = findViewById<ViewPager>(R.id.view_pager)
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
 
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
-        tabLayout.setupWithViewPager(viewPager)
+        mViewPager.adapter = ViewPagerAdapter(supportFragmentManager)
+        tabLayout.setupWithViewPager(mViewPager)
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -48,17 +47,14 @@ class MainPageActivity : AppCompatActivity() {
     }
 
     fun getViewPager(): ViewPager {
-        if (null == viewPager) {
-            viewPager = findViewById(R.id.view_pager)
-        }
-        return viewPager
+        return mViewPager
     }
 
     @Suppress("DEPRECATION")
     inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> RandomFragment()
+                0 -> RandomFragment(this@MainPageActivity)
                 1 -> CurrentTrackFragment()
                 else -> FavoriteFragment()
             }
@@ -96,5 +92,9 @@ class MainPageActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onItemClick() {
+        getViewPager().setCurrentItem(1, true)
     }
 }

@@ -14,7 +14,7 @@ import com.example.finaltask.OnItemClickListener
 import com.example.finaltask.R
 import com.example.finaltask.RecyclerMusicAdapter
 
-class RandomFragment : Fragment(), OnItemClickListener {
+class RandomFragment(private val itemClickListener: OnCurrentFragmentClickListener) : Fragment(), OnItemClickListener {
 
 
     private lateinit var recyclerView: RecyclerView
@@ -43,6 +43,7 @@ class RandomFragment : Fragment(), OnItemClickListener {
         durationTrackBind: String, imageAlbumBind: ByteArray?, pathBind: String
     ) {
 
+        itemClickListener.onItemClick()
         setFragmentResult(
             "requestKey", bundleOf(
                 "trackNameKey" to trackNameBind,
@@ -53,6 +54,10 @@ class RandomFragment : Fragment(), OnItemClickListener {
                 "pathKey" to pathBind
             )
         )
+    }
+
+    interface OnCurrentFragmentClickListener{
+        fun onItemClick()
     }
 }
 
